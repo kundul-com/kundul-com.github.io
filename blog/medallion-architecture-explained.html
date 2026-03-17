@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Medallion Architecture?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-slate-900">KUNDUL</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/what-we-do.html" class="text-gray-600 hover:text-slate-900 transition">Services</a>
+        <a href="/who-we-are.html" class="text-gray-600 hover:text-slate-900 transition">About Us</a>
+        <a href="/blog/" class="text-slate-900 font-medium">Blog</a>
+        <a href="/careers.html" class="text-gray-600 hover:text-slate-900 transition">Careers</a>
+      </nav>
+      <a href="/contact.html" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center">Let's talk</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <article>
+      <header class="mb-10">
+        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">What is Medallion Architecture?</h1>
+        <p class="mt-2 text-slate-600 text-lg">A simple, scalable way to organize data from raw to analytics-ready.</p>
+      </header>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">The three layers: Bronze, Silver, Gold</h2>
+        <p class="text-slate-700 leading-relaxed">
+          <strong>Medallion architecture</strong> is a pattern that structures your data lake or warehouse into three layers, often called <strong>Bronze</strong>, <strong>Silver</strong>, and <strong>Gold</strong>. Data flows one way: from raw ingestion into Bronze, through cleaning and conforming in Silver, into business-ready datasets in Gold.
+        </p>
+        <ul class="mt-4 list-disc pl-6 space-y-2 text-slate-700">
+          <li><strong>Bronze:</strong> Raw data as landed from sources—minimal or no transformation. Preserves history and allows reprocessing.</li>
+          <li><strong>Silver:</strong> Cleaned, deduplicated, and conformed data. Often one table per entity, with consistent types and keys.</li>
+          <li><strong>Gold:</strong> Business-level aggregates, marts, and wide tables optimized for reporting, analytics, or ML.</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Why use it?</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Medallion gives teams a shared mental model: everyone knows where raw data lives (Bronze), where to find cleaned, conformed data (Silver), and where to consume analytics-ready data (Gold). It supports incremental processing, reprocessing when logic changes, and clear ownership. It’s technology-agnostic—you can implement it on Snowflake, Databricks, or other platforms—and works well with tools like Fivetran (Bronze), dbt (Silver and Gold), and medallion-style lakehouses.
+        </p>
+      </section>
+
+      <section class="pt-6 border-t border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-3">Learn more</h2>
+        <ul class="list-none space-y-2 text-slate-700">
+          <li><a href="medallion-architecture-snowflake-implementation.html" class="text-sky-600 hover:underline">Implementing medallion architecture on Snowflake</a></li>
+          <li><a href="index.html" class="text-sky-600 hover:underline">Back to Blog</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bg-slate-800 py-12 text-slate-300 mt-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        <div>
+          <p class="font-bold text-white text-lg">KUNDUL</p>
+          <p class="mt-1 text-sm">Data engineering & AI on Snowflake.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Quick navigation</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/what-we-do.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/who-we-are.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+            <li><a href="/careers.html" class="hover:text-white transition">Careers</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Let's talk</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Get in touch</p>
+          <a href="/contact.html" class="text-sky-400 hover:text-sky-300">Contact us</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <p>&copy; 2024 Kundul. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-400">Terms of service</a>
+          <a href="#" class="hover:text-slate-400">Privacy policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

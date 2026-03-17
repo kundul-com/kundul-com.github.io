@@ -3,146 +3,249 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KUNDUL</title>
+  <title>Kundul | Data Engineering & AI on Snowflake</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 antialiased">
   <!-- Header -->
-  <header class="bg-white shadow">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold text-slate-900">KUNDUL</a>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
-        <a href="#pricing" class="text-gray-600 hover:text-blue-600">Pricing</a>
-        <a href="#testimonials" class="text-gray-600 hover:text-blue-600">Testimonials</a>
+      <a href="/" class="text-2xl font-bold text-slate-900">KUNDUL</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/what-we-do.html" class="text-gray-600 hover:text-slate-900 transition">Services</a>
+        <a href="/who-we-are.html" class="text-gray-600 hover:text-slate-900 transition">About Us</a>
+        <a href="/blog/" class="text-gray-600 hover:text-slate-900 transition">Blog</a>
+        <a href="/careers.html" class="text-gray-600 hover:text-slate-900 transition">Careers</a>
       </nav>
-      <a class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
-               target="_blank" href="https://develop.kundul.com/signup/">Start Free</a>
+      <a href="/contact.html" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center">
+        Let's talk
+      </a>
     </div>
-
-    <script>
-      (function (window, document, scriptId){
-          function loadkundulSDK() {
-              // Check if the script with the given ID already exists
-              if (!document.getElementById(scriptId)) {
-                  // Get the first script tag in the document
-                  var firstScript = document.getElementsByTagName('script')[0];
-                  // Create a new script element
-                  var newScript = document.createElement('script');
-                  newScript.type = "text/javascript";  // Set the script type
-                  newScript.async = true;  // Set the script to load asynchronously
-                  newScript.src = "https://app.kundul.com/static/sdk/kundul.sdk.js";  // Set the script source URL
-                  
-                  // Insert the new script before the first script tag in the document
-                  firstScript.parentNode.insertBefore(newScript, firstScript);
-              }
-          }
-
-
-          // Check if the kundul function is already defined
-          if (typeof window.kundul !== "function") {
-              var kundulPlaceholder = function () {
-                  // console.log(arguments);
-                  kundulPlaceholder.q.push(arguments);  // Queue up the arguments for later execution
-              };
-              kundulPlaceholder.q = [];  // Initialize the queue
-              window.kundul = kundulPlaceholder;  // Assign the placeholder to window.kundul
-          }
-
-          if (document.readyState === "complete") {
-              console.log("Document is loaded.");
-              loadkundulSDK();
-          } else if (window.attachEvent) {
-              console.log("Document is loaded. Old IE Browsers.")
-              window.attachEvent("onload", loadkundulSDK);
-          } else {
-              window.addEventListener("load", function(){
-                  loadkundulSDK();
-                  // console.log("Document is loaded. Modern Browsers.")
-              }, false);
-          }
-
-      })(window, document, "kundul-sdk");
-  </script>
-
-
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-blue-50 py-16">
-    <div class="relative max-w-5xl mx-auto pt-20 sm:pt-24 lg:pt-32">
-        <h1
-            class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center">
-            Simple feedback collection for powerful roadmaps</h1>
-        <p class="mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto">
-            Simplify feedback collection for your web apps.</p>
-        <div class="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm">
-            <a class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
-               target="_blank" href="https://develop.kundul.com/signup/">Create Free Account</a>
-        </div>
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24 sm:py-32">
+    <div class="container mx-auto px-6 text-center max-w-4xl">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+        Ready to unlock your data's full potential?
+      </h1>
+      <p class="mt-6 text-xl text-slate-300">
+        Let's talk.
+      </p>
+      <p class="mt-8 text-lg text-slate-400 max-w-2xl mx-auto">
+        Simplify and accelerate your data journey, <strong class="text-white">together</strong>.
+      </p>
+      <p class="mt-6 text-slate-400 max-w-2xl mx-auto">
+        We are a next-gen data & AI services firm helping growth-focused companies scale with architecture-led data platforms, analytics, and AI—built on Snowflake.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/contact.html" class="bg-white text-slate-900 font-semibold px-8 py-4 rounded-lg hover:bg-slate-100 transition">Let's talk</a>
+        <a href="/what-we-do.html" class="border-2 border-white/50 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/10 transition">Services</a>
+      </div>
     </div>
   </section>
 
-
-  <!-- Features Section -->
-  <section id="features" class="py-16">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-gray-800">Features You'll Love</h2>
-      <p class="mt-4 text-gray-600">Packed with powerful tools to help you succeed.</p>
-      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg shadow p-6">
-          <div class="text-blue-600">
-            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"></path></svg>
+  <!-- Differentiators -->
+  <section class="py-16 bg-white border-b border-slate-200">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="w-14 h-14 rounded-xl bg-sky-100 flex items-center justify-center mx-auto text-sky-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
           </div>
-          <h3 class="mt-4 text-lg font-bold">Feature One</h3>
-          <p class="mt-2 text-gray-600">Description of the amazing feature that helps you save time and effort.</p>
+          <h3 class="mt-4 font-bold text-slate-900">Snowflake-native</h3>
+          <p class="mt-1 text-sm text-slate-600">We build where your data lives—in the Data Cloud.</p>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <div class="text-blue-600">
-            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"></path></svg>
+        <div>
+          <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center mx-auto text-amber-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="mt-4 text-lg font-bold">Feature Two</h3>
-          <p class="mt-2 text-gray-600">Another great feature that enhances your productivity.</p>
+          <h3 class="mt-4 font-bold text-slate-900">Architecture-led</h3>
+          <p class="mt-1 text-sm text-slate-600">Blueprints that align technology with business outcomes.</p>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <div class="text-blue-600">
-            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"></path></svg>
+        <div>
+          <div class="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center mx-auto text-emerald-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </div>
-          <h3 class="mt-4 text-lg font-bold">Feature Three</h3>
-          <p class="mt-2 text-gray-600">Another cool feature to make your experience better.</p>
+          <h3 class="mt-4 font-bold text-slate-900">Full-stack data</h3>
+          <p class="mt-1 text-sm text-slate-600">Ingestion, transformation, governance, and AI in one stack.</p>
+        </div>
+        <div>
+          <div class="w-14 h-14 rounded-xl bg-rose-100 flex items-center justify-center mx-auto text-rose-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="mt-4 font-bold text-slate-900">Governance-first</h3>
+          <p class="mt-1 text-sm text-slate-600">Trusted, auditable data from day one.</p>
         </div>
       </div>
     </div>
   </section>
 
-    
+  <!-- The challenge + Our approach (BTB-style) -->
+  <section class="py-20 bg-slate-50">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <h2 class="text-3xl font-bold text-slate-900 text-center">The biggest challenge for growth companies is navigating complexity</h2>
+      <p class="mt-6 text-slate-600 text-center leading-relaxed">
+        Businesses face pressure to deliver high-quality products and services while adapting to changing customer demands and technology. Too often, they're hindered by misaligned business objectives, technology initiatives, and resource allocation.
+      </p>
+      <div class="mt-10 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <p class="text-slate-800 font-medium">Our key to unlock it: <strong class="text-slate-900">Data & AI Blueprint</strong></p>
+        <p class="mt-2 text-slate-600 text-sm">An architecture-led framework that helps you balance technology initiatives with business goals and resources—so you can scale with data and AI on Snowflake. We're not just keeping up; we're building future-ready, AI-powered data platforms.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- CTA Section -->
-  <section id="cta" class="bg-blue-600 py-16 text-white">
+  <!-- Three pillars (like Intelligent Platforms, Interconnected Data, Integrated AI) -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-slate-900 text-center">Unleashing the Data & AI Blueprint</h2>
+      <p class="mt-4 text-slate-600 text-center max-w-2xl mx-auto">
+        Born from industry experience, our blueprint simplifies execution with an evolutionary architecture aligned to your priorities and outcomes.
+      </p>
+      <div class="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div class="rounded-2xl border border-slate-200 p-8 hover:shadow-lg hover:border-slate-300 transition">
+          <div class="w-14 h-14 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+          </div>
+          <h3 class="mt-6 text-xl font-bold text-slate-900">Data engineering</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">We design and build scalable data pipelines and warehouses on Snowflake. Fivetran for ingestion, optimized storage, and pipelines that land data on time and in the right shape for analytics and AI.</p>
+          <a href="/what-we-do.html#data-engineering" class="mt-4 inline-block text-sky-600 font-semibold text-sm hover:text-sky-700">Learn more →</a>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-8 hover:shadow-lg hover:border-slate-300 transition">
+          <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <h3 class="mt-6 text-xl font-bold text-slate-900">Interconnected data</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">We turn data chaos into clarity. Modern data and analytics with dbt and dbt Cloud, domain-driven models, and data governance so your organization can democratize insights and make better decisions.</p>
+          <a href="/what-we-do.html#analytics-governance" class="mt-4 inline-block text-amber-600 font-semibold text-sm hover:text-amber-700">Learn more →</a>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-8 hover:shadow-lg hover:border-slate-300 transition">
+          <div class="w-14 h-14 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </div>
+          <h3 class="mt-6 text-xl font-bold text-slate-900">Integrated AI</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">We shape the future with AI inside Snowflake. Snowflake Cortex, Snowflake Intelligence, and custom agents so you can unlock the full potential of your data with GenAI and ML—governed and secure.</p>
+          <a href="/what-we-do.html#ai" class="mt-4 inline-block text-indigo-600 font-semibold text-sm hover:text-indigo-700">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology partners -->
+  <section class="py-16 bg-slate-50 border-y border-slate-200">
     <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold">Ready to Get Started?</h2>
-      <p class="mt-4">Join thousands of happy customers today and experience the difference.</p>
-      <a target="_blank" href="https://develop.kundul.com/signup/" class="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded hover:bg-gray-100">
-        Sign Up Now
-      </a>
+      <h2 class="text-2xl font-bold text-slate-900">Our technology partners</h2>
+      <p class="mt-2 text-slate-600 max-w-xl mx-auto">We deliver with best-in-class platforms so you get proven, scalable outcomes.</p>
+      <div class="mt-10 flex flex-wrap justify-center items-center gap-10 text-slate-500 font-semibold">
+        <span class="text-slate-700">Snowflake</span>
+        <span class="text-slate-700">dbt</span>
+        <span class="text-slate-700">dbt Cloud</span>
+        <span class="text-slate-700">Fivetran</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights / Blog preview -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-slate-900 text-center">Stories & insights</h2>
+      <p class="mt-2 text-slate-600 text-center">Ideas and guides from our team.</p>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/blog/snowflake-intelligence.html" class="block rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-slate-300 transition text-left">
+          <span class="text-xs font-semibold text-sky-600 uppercase tracking-wide">Snowflake</span>
+          <h3 class="mt-2 text-lg font-bold text-slate-900">Snowflake Intelligence: A Beginner's Guide</h3>
+          <p class="mt-2 text-slate-600 text-sm">Ask questions in plain English and get answers from your data—no SQL required.</p>
+          <span class="mt-3 inline-block text-sky-600 font-semibold text-sm">Learn more →</span>
+        </a>
+        <a href="/blog/dbt-getting-started-snowflake.html" class="block rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-slate-300 transition text-left">
+          <span class="text-xs font-semibold text-amber-600 uppercase tracking-wide">dbt</span>
+          <h3 class="mt-2 text-lg font-bold text-slate-900">Getting Started with dbt on Snowflake</h3>
+          <p class="mt-2 text-slate-600 text-sm">Run your first dbt project against Snowflake in minutes.</p>
+          <span class="mt-3 inline-block text-sky-600 font-semibold text-sm">Learn more →</span>
+        </a>
+        <a href="/blog/medallion-architecture-explained.html" class="block rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-slate-300 transition text-left">
+          <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Medallion</span>
+          <h3 class="mt-2 text-lg font-bold text-slate-900">What is Medallion Architecture?</h3>
+          <p class="mt-2 text-slate-600 text-sm">A simple, scalable way to organize data from raw to analytics-ready.</p>
+          <span class="mt-3 inline-block text-sky-600 font-semibold text-sm">Learn more →</span>
+        </a>
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/blog/" class="text-sky-600 font-semibold hover:text-sky-700">View all →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers CTA -->
+  <section class="py-16 bg-slate-900 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold">Join the data-led revolution</h2>
+      <p class="mt-4 text-slate-300 max-w-xl mx-auto">If you're ready to grow your career and help companies build better data and AI, we'd love to hear from you.</p>
+      <a href="/careers.html" class="mt-8 inline-block bg-white text-slate-900 font-semibold px-8 py-4 rounded-lg hover:bg-slate-100 transition">Explore roles</a>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-slate-50">
+    <div class="container mx-auto px-6 text-center max-w-2xl">
+      <h2 class="text-3xl font-bold text-slate-900">Simplifying complexity, amplifying results</h2>
+      <p class="mt-4 text-slate-600">We help you move along the arc of growth with architecture-led data and AI on Snowflake. Ready to turbocharge your data journey?</p>
+      <a href="/contact.html" class="mt-8 inline-block bg-slate-900 text-white font-semibold px-8 py-4 rounded-lg hover:bg-slate-800 transition">Let's talk</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 py-8 text-gray-300">
-    <div class="container mx-auto px-6 text-center">
-      <p>&copy; 2024 SaaSBrand. All rights reserved.</p>
-      <div class="mt-4">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
-        <span class="mx-2">|</span>
-        <a href="#" class="hover:text-white">Terms of Service</a>
+  <footer class="bg-slate-800 py-12 text-slate-300">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        <div>
+          <p class="font-bold text-white text-lg">KUNDUL</p>
+          <p class="mt-1 text-sm">Data engineering & AI on Snowflake.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Quick navigation</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/what-we-do.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/who-we-are.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+            <li><a href="/careers.html" class="hover:text-white transition">Careers</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Let's talk</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Get in touch</p>
+          <a href="/contact.html" class="text-sky-400 hover:text-sky-300">Contact us</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <p>&copy; 2024 Kundul. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-400">Terms of service</a>
+          <a href="#" class="hover:text-slate-400">Privacy policy</a>
+        </div>
       </div>
     </div>
   </footer>
 
-
-
-
-
+  <script>
+    (function (window, document, scriptId){
+      function loadkundulSDK() {
+        if (!document.getElementById(scriptId)) {
+          var firstScript = document.getElementsByTagName('script')[0];
+          var newScript = document.createElement('script');
+          newScript.type = "text/javascript";
+          newScript.async = true;
+          newScript.src = "https://app.kundul.com/static/sdk/kundul.sdk.js";
+          firstScript.parentNode.insertBefore(newScript, firstScript);
+        }
+      }
+      if (typeof window.kundul !== "function") {
+        var kundulPlaceholder = function () { kundulPlaceholder.q.push(arguments); };
+        kundulPlaceholder.q = [];
+        window.kundul = kundulPlaceholder;
+      }
+      if (document.readyState === "complete") { loadkundulSDK(); } else { window.addEventListener("load", loadkundulSDK, false); }
+    })(window, document, "kundul-sdk");
+  </script>
 </body>
 </html>

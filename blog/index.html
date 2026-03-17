@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Kundul</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-slate-900">KUNDUL</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/what-we-do.html" class="text-gray-600 hover:text-slate-900 transition">Services</a>
+        <a href="/who-we-are.html" class="text-gray-600 hover:text-slate-900 transition">About Us</a>
+        <a href="/blog/" class="text-slate-900 font-medium">Blog</a>
+        <a href="/careers.html" class="text-gray-600 hover:text-slate-900 transition">Careers</a>
+      </nav>
+      <a href="/contact.html" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center">Let's talk</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <header class="mb-10">
+      <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Blog</h1>
+      <p class="mt-2 text-slate-600 text-lg">Stories and insights from our team.</p>
+    </header>
+
+    <ul class="space-y-6 list-none p-0 m-0">
+      <li>
+        <a href="snowflake-intelligence.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-sky-600 uppercase tracking-wide">Snowflake</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Snowflake Intelligence: A Beginner's Guide</h2>
+          <p class="mt-1 text-slate-600 text-sm">Ask questions in plain English and get answers from your data—no SQL required.</p>
+        </a>
+      </li>
+      <li>
+        <a href="snowflake-data-cloud-getting-started.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-sky-600 uppercase tracking-wide">Snowflake</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Getting Started with the Snowflake Data Cloud</h2>
+          <p class="mt-1 text-slate-600 text-sm">A beginner-friendly overview of Snowflake's platform and how to run your first workloads.</p>
+        </a>
+      </li>
+      <li>
+        <a href="dbt-getting-started-snowflake.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-amber-600 uppercase tracking-wide">dbt</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Getting Started with dbt on Snowflake</h2>
+          <p class="mt-1 text-slate-600 text-sm">Run your first dbt project against Snowflake in minutes.</p>
+        </a>
+      </li>
+      <li>
+        <a href="dbt-best-practices-analytics-engineering.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-amber-600 uppercase tracking-wide">dbt</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">dbt Best Practices for Analytics Engineering</h2>
+          <p class="mt-1 text-slate-600 text-sm">How to structure models, tests, and docs so your dbt project stays maintainable and reliable.</p>
+        </a>
+      </li>
+      <li>
+        <a href="apache-airflow-etl-elt-best-practices.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-orange-600 uppercase tracking-wide">Airflow</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Apache Airflow: ETL and ELT Best Practices</h2>
+          <p class="mt-1 text-slate-600 text-sm">A practical guide to building reliable data pipelines—from ETL vs ELT to atomic tasks and data quality.</p>
+        </a>
+      </li>
+      <li>
+        <a href="fivetran-getting-started-snowflake.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-violet-600 uppercase tracking-wide">Fivetran</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Getting Started with Fivetran and Snowflake</h2>
+          <p class="mt-1 text-slate-600 text-sm">Move data from your sources into Snowflake with minimal setup.</p>
+        </a>
+      </li>
+      <li>
+        <a href="fivetran-best-practices-pipelines.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-violet-600 uppercase tracking-wide">Fivetran</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Fivetran Best Practices for Reliable Pipelines</h2>
+          <p class="mt-1 text-slate-600 text-sm">Keep your Fivetran–Snowflake pipelines predictable and easy to operate.</p>
+        </a>
+      </li>
+      <li>
+        <a href="medallion-architecture-explained.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Medallion</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">What is Medallion Architecture?</h2>
+          <p class="mt-1 text-slate-600 text-sm">A simple, scalable way to organize data from raw to analytics-ready.</p>
+        </a>
+      </li>
+      <li>
+        <a href="medallion-architecture-snowflake-implementation.html" class="block bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-slate-300 hover:shadow-md transition">
+          <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Medallion</span>
+          <h2 class="mt-2 text-xl font-semibold text-slate-900">Implementing Medallion Architecture on Snowflake</h2>
+          <p class="mt-1 text-slate-600 text-sm">How to map Bronze, Silver, and Gold to Snowflake and dbt.</p>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <footer class="bg-slate-800 py-12 text-slate-300 mt-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        <div>
+          <p class="font-bold text-white text-lg">KUNDUL</p>
+          <p class="mt-1 text-sm">Data engineering & AI on Snowflake.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Quick navigation</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/what-we-do.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/who-we-are.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+            <li><a href="/careers.html" class="hover:text-white transition">Careers</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Let's talk</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Get in touch</p>
+          <a href="/contact.html" class="text-sky-400 hover:text-sky-300">Contact us</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <p>&copy; 2024 Kundul. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-400">Terms of service</a>
+          <a href="#" class="hover:text-slate-400">Privacy policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

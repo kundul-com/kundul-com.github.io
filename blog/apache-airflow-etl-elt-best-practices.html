@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apache Airflow: ETL and ELT Best Practices</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-slate-900">KUNDUL</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/what-we-do.html" class="text-gray-600 hover:text-slate-900 transition">Services</a>
+        <a href="/who-we-are.html" class="text-gray-600 hover:text-slate-900 transition">About Us</a>
+        <a href="/blog/" class="text-slate-900 font-medium">Blog</a>
+        <a href="/careers.html" class="text-gray-600 hover:text-slate-900 transition">Careers</a>
+      </nav>
+      <a href="/contact.html" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center">Let's talk</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <article>
+      <header class="mb-10">
+        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Apache Airflow: ETL and ELT Best Practices</h1>
+        <p class="mt-2 text-slate-600 text-lg">A practical guide to building reliable data pipelines with Airflow—from ETL vs ELT to atomic tasks and data quality.</p>
+      </header>
+
+      <section class="mb-10">
+        <p class="text-slate-700 leading-relaxed">
+          Data engineering has evolved quickly: more tools, more use cases, and higher expectations. No matter the end goal—analytics, dashboards, or AI—data must first be <strong>extracted</strong> from sources, <strong>transformed</strong> into the right shape, and <strong>loaded</strong> into a warehouse or lake. ETL and ELT pipelines are the foundation of that flow. <strong>Apache Airflow</strong>, originally built for these pipelines, has become the open-source standard for orchestrating data workflows. In the 2024 State of Apache Airflow Report, <a href="https://www.astronomer.io/state-of-airflow" class="text-sky-600 hover:underline" target="_blank" rel="noopener">95% of Airflow users</a> rely on it to run ETL and ELT. This post summarizes key concepts and best practices from Astronomer’s guide, <em>Best Practices for ETL and ELT Pipelines with Apache Airflow</em>.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">ETL vs ELT (and ETLT)</h2>
+        <p class="text-slate-700 leading-relaxed">
+          <strong>ETL</strong> (Extract, Transform, Load) means you transform data <em>before</em> loading it into the target. Transformation happens “in-flight”—often in the orchestration layer (e.g. Airflow workers) or an external service. You might do this when you only need a subset of the data, want to combine multiple sources before loading, or need to change format (e.g. creating embeddings before loading into a vector store). The target receives only what you choose to persist.
+        </p>
+        <p class="text-slate-700 leading-relaxed mt-4">
+          <strong>ELT</strong> (Extract, Load, Transform) means you load the full raw data into the target first, then transform it <em>inside</em> the warehouse or lake. Modern cloud warehouses and lakes support this well: storage is cheap, and they offer strong “pushdown” compute (SQL, Spark, etc.). ELT is a natural fit when you want to keep all raw data and use the target’s engine for heavy transformations.
+        </p>
+        <p class="text-slate-700 leading-relaxed mt-4">
+          In practice, many teams use a mix—<strong>ETLT</strong>: light transformation in-flight, load, then further transformation in the target. Airflow can orchestrate ETL, ELT, and ETLT patterns together, so you can pick the right approach per source or use case.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Passing data between tasks: XCom vs external storage</h2>
+        <p class="text-slate-700 leading-relaxed">
+          In pipelines, one task often needs output from another. Airflow’s built-in mechanism for this is <strong>XCom</strong> (cross-communication): small pieces of data (e.g. file paths, config) are stored in the Airflow metadata database. Standard XCom is meant for small, serializable data (e.g. JSON). For larger payloads, use a <strong>custom XCom backend</strong> (e.g. Object Storage backend in Airflow 2.9+) so data is written to S3, GCS, or Azure Blob and only a reference is kept in the metadata DB. The alternative is to <strong>explicitly write and read from external storage</strong> inside your tasks—more control, but you handle paths and serialization yourself. For production pipelines that pass non-trivial data between tasks, a custom XCom backend (or explicit external storage) is recommended.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Where to run transformations</h2>
+        <p class="text-slate-700 leading-relaxed">
+          The “T” in ETL/ELT can run in several places. <strong>Airflow workers</strong> can run Python (or other languages via KubernetesPodOperator) for moderate-sized data. If data or compute needs exceed worker capacity, use <strong>external compute</strong>: Spark, Ray, Databricks, or the target system itself. In ELT, transformation usually runs in the <strong>target</strong> (e.g. Snowflake, BigQuery) via SQL or tools like dbt; Astronomer’s <strong>Cosmos</strong> lets you run dbt projects as Airflow DAGs with each model as a task. Choosing ETL vs ELT shapes where transformation runs—ETL often uses workers or external clusters; ELT uses the warehouse or lake.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Data quality checks</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Relying on users to report bad data is a last resort. Build in <strong>data quality checks</strong> as tasks. Two useful types: <strong>stopping checks</strong> (fail the pipeline so bad data doesn’t propagate—e.g. duplicate primary keys) and <strong>warning checks</strong> (alert but allow the run to continue—e.g. high null rate in a column). Common placements: right after extract (validate source data) and after load (SQL-based checks in the target). You can implement checks with Airflow’s SQL check operators, custom Python, or tools like Great Expectations or Soda. Design for the worst case: what could go wrong, and what would be most costly downstream? Avoid alert fatigue by focusing on checks that truly require action.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Three core DAG best practices</h2>
+        <ul class="list-disc pl-6 space-y-2 text-slate-700">
+          <li><strong>Atomicity:</strong> Each task should do one clear thing (e.g. one extract, one transform, one load). That gives you visibility and lets you retry only the failed step.</li>
+          <li><strong>Idempotency:</strong> Same inputs should produce the same outputs. Use run identifiers (e.g. <code class="bg-slate-100 px-1 rounded">logical_date</code>) to partition data so re-runs don’t duplicate or overwrite incorrectly.</li>
+          <li><strong>Modularity:</strong> Reuse logic across DAGs—shared functions, custom operators, and config (e.g. SQL in separate files). Treat DAGs like config; keep heavy logic out of the top level.</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Avoid top-level code and set retries</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Airflow parses DAG files frequently (e.g. every 30 seconds). <strong>Top-level code</strong> runs on every parse—so no database calls or heavy work at import time. Use <strong>dynamic task mapping</strong> when you need a variable number of tasks (e.g. one task per file or table) so task generation happens at runtime without top-level I/O. For resilience, set <strong>retries</strong> and <strong>retry_delay</strong> at the DAG or task level so transient failures (e.g. database concurrency) don’t fail the run immediately.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Treat DAGs like production code</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Store DAGs in version control, use at least dev and production environments, and run tests. <strong>Unit tests</strong> for custom operators and Python logic; <strong>DAG validation tests</strong> (e.g. via DagBag) to enforce standards (allowed operators, required tags). Use CI/CD to deploy from a main branch after tests pass. Scaling also matters: tune DAG parse timeouts, <code class="bg-slate-100 px-1 rounded">max_active_runs</code>, and pools so your Airflow instance keeps up with pipeline growth.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Features that help ETL and ELT</h2>
+        <p class="text-slate-700 leading-relaxed">
+          <strong>Dynamic task mapping</strong> (<code class="bg-slate-100 px-1 rounded">.expand()</code> / <code class="bg-slate-100 px-1 rounded">.partial()</code>) creates a variable number of task instances per run (e.g. one task per file or partition), improving observability and retries. <strong>Task groups</strong> modularize repeated patterns (e.g. extract → transform → load) into reusable blocks. <strong>Dataset-based scheduling</strong> (Airflow 2.4+) triggers DAGs when upstream datasets are updated, so downstream pipelines run when data is ready instead of on a fixed schedule. For large data between tasks, use a custom XCom backend (e.g. Object Storage) so the metadata database isn’t overloaded.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Pre-flight checklist</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Before coding, clarify: who consumes the data and how fresh it must be; what quality and governance rules apply; where the source and target live and their formats; whether you need external storage between steps; and what tools are already in use. Answering these (even partially) helps you choose ETL vs ELT, where to run transforms, and how to integrate with existing systems like Snowflake, dbt, or Fivetran.
+        </p>
+      </section>
+
+      <section class="pt-6 border-t border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-3">Source and further reading</h2>
+        <p class="text-slate-600 text-sm mb-2">
+          This post is based on <em>Apache Airflow® Best Practices: ETL and ELT Pipelines</em> (Astronomer). The guide covers definitions, pre-flight checklists, XCom vs external storage, operators and decorators, data quality, DAG design, testing, dynamic task mapping, programmatic DAGs, task groups, dataset scheduling, and key provider packages for clouds and warehouses.
+        </p>
+        <ul class="list-none space-y-2 text-slate-700">
+          <li><a href="https://datafinder.ru/files/Airflow/V4-Best-practices-for-ETL-and-ELT-pipelines-with-Apache-Airflow.pdf" class="text-sky-600 hover:underline" target="_blank" rel="noopener">Best Practices for ETL and ELT Pipelines with Apache Airflow (PDF)</a></li>
+          <li><a href="https://docs.astronomer.io/learn/airflow-etl" class="text-sky-600 hover:underline" target="_blank" rel="noopener">Astronomer: ETL and ELT with Airflow</a></li>
+          <li><a href="medallion-architecture-explained.html" class="text-sky-600 hover:underline">What is Medallion Architecture?</a></li>
+          <li><a href="index.html" class="text-sky-600 hover:underline">Back to Blog</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bg-slate-800 py-12 text-slate-300 mt-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        <div>
+          <p class="font-bold text-white text-lg">KUNDUL</p>
+          <p class="mt-1 text-sm">Data engineering & AI on Snowflake.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Quick navigation</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/what-we-do.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/who-we-are.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+            <li><a href="/careers.html" class="hover:text-white transition">Careers</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Let's talk</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Get in touch</p>
+          <a href="/contact.html" class="text-sky-400 hover:text-sky-300">Contact us</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <p>&copy; 2024 Kundul. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-400">Terms of service</a>
+          <a href="#" class="hover:text-slate-400">Privacy policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

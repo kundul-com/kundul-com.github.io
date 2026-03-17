@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementing Medallion Architecture on Snowflake</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-slate-900">KUNDUL</a>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/what-we-do.html" class="text-gray-600 hover:text-slate-900 transition">Services</a>
+        <a href="/who-we-are.html" class="text-gray-600 hover:text-slate-900 transition">About Us</a>
+        <a href="/blog/" class="text-slate-900 font-medium">Blog</a>
+        <a href="/careers.html" class="text-gray-600 hover:text-slate-900 transition">Careers</a>
+      </nav>
+      <a href="/contact.html" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center">Let's talk</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <article>
+      <header class="mb-10">
+        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Implementing Medallion Architecture on Snowflake</h1>
+        <p class="mt-2 text-slate-600 text-lg">How to map Bronze, Silver, and Gold to Snowflake and dbt.</p>
+      </header>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Map layers to databases and schemas</h2>
+        <p class="text-slate-700 leading-relaxed">
+          On Snowflake, each medallion layer can be a separate <strong>schema</strong> (e.g. <code class="bg-slate-100 px-1 rounded">raw</code>, <code class="bg-slate-100 px-1 rounded">silver</code>, <code class="bg-slate-100 px-1 rounded">gold</code>) or a separate <strong>database</strong> if you want stronger isolation. Ingest data (e.g. via Fivetran or Snowpipe) into the Bronze schema; use dbt to build Silver and Gold in their schemas. Control access with roles so that, for example, only Gold (and maybe Silver) is exposed to analysts and BI tools.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Bronze: raw landing</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Bronze tables should look like the source: same structure, optional metadata columns (e.g. <code class="bg-slate-100 px-1 rounded">_loaded_at</code>). Fivetran and similar tools often write directly into a Bronze-style schema. If you’re loading from files or streams, use stages and COPY into tables. Avoid transformation here; the goal is to keep a reliable, replayable raw layer.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Silver and Gold with dbt</h2>
+        <p class="text-slate-700 leading-relaxed">
+          In dbt, define <strong>sources</strong> pointing at Bronze tables. Your <strong>staging</strong> models (light cleaning, renaming) can be considered the start of Silver; <strong>intermediate</strong> models (dedup, conformed keys, one entity per table) are Silver. <strong>Marts</strong>—aggregations, wide tables, topic-based datasets—are Gold. Use dbt’s schema config so Silver and Gold models materialize into the right Snowflake schemas. Add tests and docs so the medallion layers stay documented and trustworthy.
+        </p>
+      </section>
+
+      <section class="pt-6 border-t border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-3">Learn more</h2>
+        <ul class="list-none space-y-2 text-slate-700">
+          <li><a href="medallion-architecture-explained.html" class="text-sky-600 hover:underline">What is medallion architecture?</a></li>
+          <li><a href="dbt-getting-started-snowflake.html" class="text-sky-600 hover:underline">Getting started with dbt on Snowflake</a></li>
+          <li><a href="index.html" class="text-sky-600 hover:underline">Back to Blog</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bg-slate-800 py-12 text-slate-300 mt-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        <div>
+          <p class="font-bold text-white text-lg">KUNDUL</p>
+          <p class="mt-1 text-sm">Data engineering & AI on Snowflake.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Quick navigation</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/what-we-do.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/who-we-are.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+            <li><a href="/careers.html" class="hover:text-white transition">Careers</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Let's talk</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold text-white text-sm uppercase tracking-wide mb-4">Get in touch</p>
+          <a href="/contact.html" class="text-sky-400 hover:text-sky-300">Contact us</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <p>&copy; 2024 Kundul. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-400">Terms of service</a>
+          <a href="#" class="hover:text-slate-400">Privacy policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
